@@ -3,14 +3,16 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Card, CardContent } from '@mui/material';
+import { Button, Card, CardContent } from '@mui/material';
 import 'katex/dist/katex.min.css';
 import { BlockMath } from 'react-katex';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import gaussLawImage from '../../assets/flux-surface.png';
 import gaussMagnetismImage from '../../assets/gauss-magnetism-law-dipole.gif';
 import faradayLawImage from '../../assets/faraday-law.gif';
 import ampereLawImage from '../../assets/ampere-law.gif';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 const equations = [
   {
@@ -105,18 +107,44 @@ DynamicAccordion.propTypes = {
 
 export default function MaxwellEquation() {
   return (
-    <div className="w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {equations?.map((eq, index) => (
-          <DynamicAccordion 
-            key={index}
-            title={eq.title}
-            description={eq.description}
-            formulas={eq.formulas}
-            images={eq.images}
-          />
-        ))}
+    <>
+      <div className="flex justify-start p-8 px-20">
+        <Button 
+          variant="outlined" 
+          component={Link} 
+          to="/"
+          startIcon={<ArrowBackIosIcon />}
+          color="secondary"
+        >Back</Button>
       </div>
-    </div>
+      <div className="mx-2 mt-3 mb-5">
+        <Typography variant="h2" className="font-extrabold">Maxwell Equation</Typography>
+      </div>
+      <div className="px-20">
+        <Card sx={{ minWidth: 275 }} className="my-5">
+          <CardContent>
+            <Typography sx={{ fontSize: 16 }} className="text-justify" gutterBottom>
+              Maxwell Equation are a set of coupled partial differential equations that, together with the Lorentz force law, 
+              form the foundation of classical electromagnetism, classical optics, electric and magnetic circuits. The equations provide 
+              a mathematical model for electric, optical, and radio technologies, such as power generation, electric motors, wireless 
+              communication, lenses, radar, etc.
+            </Typography>
+          </CardContent>
+        </Card>
+      </div>
+      <div className="w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-20">
+          {equations?.map((eq, index) => (
+            <DynamicAccordion 
+              key={index}
+              title={eq.title}
+              description={eq.description}
+              formulas={eq.formulas}
+              images={eq.images}
+            />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
